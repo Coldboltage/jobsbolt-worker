@@ -1,5 +1,5 @@
 # Use the latest Node.js image as the base image
-FROM node:latest
+FROM node:slim
 
 # Set npm to use the official registry and clear the npm cache
 RUN npm config set registry https://registry.npmjs.org/ \
@@ -48,9 +48,6 @@ RUN if [ ! -f /root/.cache/puppeteer/chrome/linux-127.0.6533.88/chrome-linux64/c
 
 # Copy the rest of the application code
 COPY . .
-
-# Expose the port your app runs on
-EXPOSE 3000
 
 # Start Xvfb and the Node.js app
 CMD ["sh", "-c", "Xvfb :99 -screen 0 1920x1080x24 & sleep 5 && npm run start"]
