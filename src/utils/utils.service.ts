@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { JobInfoInterface, ReturnPayloadInterface } from 'src/utils/utils.type';
-import fs from 'node:fs';
 
 // const puppeteer = require('puppeteer-extra')
 // const StealthPlugin = require('puppeteer-extra-plugin-stealth')
@@ -53,18 +52,14 @@ export class UtilsService {
       try {
         await page.waitForSelector('#mosaic-jobResults');
       } catch (error) {
-        const title = await page.title();
-        console.log('Page Title:', title);
-        const screenshot = await page.screenshot({ encoding: 'base64' });
-        fs.writeFile('./screenshot.txt', screenshot, (err) => {
-          if (err) throw err;
-          console.log('Screenshot saved.');
-        });
-
-
-        throw new Error(error)
+        console.log("Page should be loaded with no jobs")
+        const nothing: ReturnPayloadInterface = {
+          jobTypeId: jobTypeId,
+          jobs: []
+        };
+        continueLoop = false
+        return nothing
       }
-      await page.waitForSelector('#mosaic-jobResults');
 
       const indeedIds = await page.evaluate(() => {
         const elements = document.querySelectorAll(`[data-jk]`);
