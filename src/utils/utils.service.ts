@@ -49,6 +49,13 @@ export class UtilsService {
         setTimeout: 60000,
       });
 
+      try {
+        await page.waitForSelector('#mosaic-jobResults');
+      } catch (error) {
+        const title = await page.title();
+        console.log('Page Title:', title);
+        throw new Error(error)
+      }
       await page.waitForSelector('#mosaic-jobResults');
 
       const indeedIds = await page.evaluate(() => {
