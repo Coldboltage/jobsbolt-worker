@@ -54,6 +54,8 @@ export class UtilsService {
       } catch (error) {
         const title = await page.title();
         console.log('Page Title:', title);
+        const screenshot = await page.screenshot({ encoding: 'base64' });
+        console.log(`Screenshot (Base64):\n${screenshot}`);
         throw new Error(error)
       }
       await page.waitForSelector('#mosaic-jobResults');
