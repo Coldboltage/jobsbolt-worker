@@ -16,7 +16,7 @@ export class JobSearchService {
     console.log(result);
     try {
       const response = await fetch(
-        `http://${process.env.API_URL}:3000/job/by-worker/${result.jobTypeId}`,
+        `http://${process.env.API_URL}:3000/api/job/by-worker/${result.jobTypeId}`,
         {
           method: 'POST',
           headers: {
@@ -27,8 +27,10 @@ export class JobSearchService {
         },
       );
       console.log(response.statusText);
+      console.log(response.status)
     } catch (error) {
       console.log(error);
+      console.log("An issue occured when sending jobs to by-worker")
     }
   }
 
