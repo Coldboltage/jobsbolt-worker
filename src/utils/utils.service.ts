@@ -53,12 +53,7 @@ export class UtilsService {
         await page.waitForSelector('#mosaic-jobResults');
       } catch (error) {
         console.log("Page should be loaded with no jobs")
-        const nothing: ReturnPayloadInterface = {
-          jobTypeId: jobTypeId,
-          jobs: []
-        };
-        continueLoop = false
-        return nothing
+        return
       }
 
       const indeedIds = await page.evaluate(() => {
