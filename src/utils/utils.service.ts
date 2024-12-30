@@ -16,7 +16,7 @@ export class UtilsService {
     location: string,
   ): Promise<ReturnPayloadInterface> {
     // add stealth plugin and use defaults (all evasion techniques)
-    const url = `https://uk.indeed.com/jobs?q=${name}${location !== null ? `&l=${location}` : ''}&fromage=14`;
+    const url = `https://uk.indeed.com/jobs?q=${name}${location !== null ? `&l=${location}` : ''}&fromage=1`;
     console.log(url);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // const browser = await puppeteer.launch({
