@@ -14,9 +14,10 @@ export class UtilsService {
     jobTypeId: string,
     name: string,
     location: string,
+    firstTime: boolean,
   ): Promise<ReturnPayloadInterface> {
     // add stealth plugin and use defaults (all evasion techniques)
-    const url = `https://uk.indeed.com/jobs?q=${name}${location !== null ? `&l=${location}` : ''}&fromage=1`;
+    const url = `https://uk.indeed.com/jobs?q=${name}${location !== null ? `&l=${location}` : ''}&fromage=${!firstTime ? '1' : '14'}`;
     console.log(url);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // const browser = await puppeteer.launch({
@@ -52,7 +53,7 @@ export class UtilsService {
       try {
         await page.waitForSelector('#mosaic-jobResults');
       } catch (error) {
-        console.log("Page should be loaded with no jobs")
+        console.log('Page should be loaded with no jobs');
         continueLoop = false
         return
       }

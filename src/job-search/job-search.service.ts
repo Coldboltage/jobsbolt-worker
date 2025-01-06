@@ -7,11 +7,12 @@ import { UtilsService } from 'src/utils/utils.service';
 export class JobSearchService {
   constructor(private utilsService: UtilsService) { }
   async create(createJobSearchDto: CreateJobSearchDto) {
-    const { jobTypeId, name, location } = createJobSearchDto;
+    const { jobTypeId, name, location, firstTime } = createJobSearchDto;
     const result = await this.utilsService.getJobSearchPage(
       jobTypeId,
       name,
       location,
+      firstTime,
     );
     console.log(result);
     try {
@@ -20,17 +21,17 @@ export class JobSearchService {
         {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${process.env.JWT_TOKEN}`,
+            Authorization: `Bearer ${process.env.JWT_TOKEN}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(result),
         },
       );
       console.log(response.statusText);
-      console.log(response.status)
+      console.log(response.status);
     } catch (error) {
       console.log(error);
-      console.log("An issue occured when sending jobs to by-worker")
+      console.log('An issue occured when sending jobs to by-worker');
     }
   }
 

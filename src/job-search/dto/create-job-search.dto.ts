@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsBoolean, IsString } from 'class-validator';
 
 export class CreateJobSearchDto {
   @IsString()
@@ -9,4 +9,7 @@ export class CreateJobSearchDto {
 
   @IsString()
   location: string;
+
+  @IsBoolean()
+  firstTime: boolean;
 }
