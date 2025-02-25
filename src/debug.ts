@@ -1,14 +1,11 @@
 const main = async () => {
   const { connect } = await import('puppeteer-real-browser');
   const { page, browser } = await connect({
-    headless: 'auto',
+    headless: true,
     args: [],
     customConfig: {},
-    skipTarget: [],
-    fingerprint: false,
     turnstile: true,
     connectOption: {},
-    fpconfig: {},
   });
 
   page.goto('https://alanreid.dev');

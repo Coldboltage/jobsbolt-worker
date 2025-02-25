@@ -29,14 +29,11 @@ export class UtilsService {
     const { connect } = await import('puppeteer-real-browser');
 
     const { page, browser } = await connect({
-      headless: 'auto',
+      headless: false,
       args: [],
       customConfig: {},
-      skipTarget: [],
-      fingerprint: false,
       turnstile: true,
       connectOption: {},
-      fpconfig: {},
     });
 
     const indeedJobList: JobInfoInterface[] = [];
@@ -47,7 +44,7 @@ export class UtilsService {
       console.log(url);
       await page.goto(`${url}&start=${counter}`, {
         waitUntil: 'domcontentloaded',
-        setTimeout: 60000,
+        timeout: 10000,
       });
 
       try {
