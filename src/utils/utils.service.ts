@@ -54,7 +54,7 @@ export class UtilsService {
         await page.waitForSelector('#mosaic-jobResults');
       } catch (error) {
         console.log('Page should be loaded with no jobs');
-        console.log(page.title());
+        console.log(await page.title());
         continueLoop = false;
         return;
       }
