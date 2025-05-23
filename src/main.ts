@@ -3,7 +3,10 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from 'src/app.module';
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env';
+dotenv.config({ path: envFile });
+console.log(envFile);
+console.log(process.env.RABBITMQ_URL);
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(

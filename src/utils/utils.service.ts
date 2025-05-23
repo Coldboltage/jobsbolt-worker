@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { JobInfoInterface, ReturnPayloadInterface } from 'src/utils/utils.type';
+import { timeout } from 'rxjs';
 
 // const puppeteer = require('puppeteer-extra')
 // const StealthPlugin = require('puppeteer-extra-plugin-stealth')
@@ -48,7 +49,9 @@ export class UtilsService {
       });
 
       try {
-        await page.waitForSelector('#mosaic-jobResults');
+        await page.waitForSelector('#mosaic-jobResults', {
+          timeout: 10000,
+        });
       } catch (error) {
         console.log('Page should be loaded with no jobs');
         console.log(await page.title());
